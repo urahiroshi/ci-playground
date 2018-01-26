@@ -1,0 +1,17 @@
+{
+  "name": "ci-playground",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:urahiroshi/ci-playground.git",
+  "author": "urahiroshi <urahiroshi@mercari.com>",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.1.5",
+    "apollo-client": "^2.2.0",
+    "apollo-link-context": "^1.0.3",
+    "apollo-link-http": "^1.3.2",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
+    "node-fetch": "^1.7.3"
+  }
+}
