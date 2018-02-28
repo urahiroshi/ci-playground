@@ -46,6 +46,7 @@ async function main() {
     const [token, baseBranch, baseSha] = getEnvValues(
       'GITHUB_TOKEN', 'BASE_BRANCH', 'BASE_SHA'
     );
+    console.log(`BASE_BRANCH=${baseBranch}, BASE_SHA=${baseSha}`);
     octokit.authenticate({ type: 'token', token });
     const oldPrs = await showOldPRs({ baseBranch, baseSha });
     if (oldPrs.length === 0) {
