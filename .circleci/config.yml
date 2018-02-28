@@ -18,7 +18,8 @@ jobs:
 
     steps:
       - checkout
-      - run: echo "I am master!"
+      - run: yarn
+      - run: BASE_BRANCH=master BASE_SHA=`git rev-parse HEAD` node index.js
 
 workflows:
   version: 2
