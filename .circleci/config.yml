@@ -19,7 +19,7 @@ jobs:
     steps:
       - checkout
       - run: yarn
-      - run: BASE_BRANCH=`git symbolic-ref --short HEAD` BASE_SHA=`git rev-parse HEAD` node index.js
+      - run: BASE_BRANCH=$CIRCLE_BRANCH BASE_SHA=$CIRCLE_SHA1 node index.js
 
 workflows:
   version: 2
