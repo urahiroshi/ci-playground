@@ -7,22 +7,33 @@ const repoInfo = {
 async function updateAndComment({ baseBranch, pr }) {
   console.log(`Update "${pr.head.ref}" base branch "${baseBranch}" from ${pr.base.sha}`);
   // pullRequests.createComment is comment for code, it uses comment for issue
-  const resMerge = await octokit.repos.merge({
-    ...repoInfo,
-    ...{
-      base: pr.head.ref,
-      head: baseBranch,
-      commit_message: `Merge ${baseBranch} into branch`,
-    },
-  });
-  const resCreateComment = await octokit.issues.createComment({
+  try {
+    const resMerge = await octokit.repos.merge({
+      ...repoInfo,
+      ...{
+        base: pr.head.ref,
+        head: baseBranch,
+        commit_message: `Merge ${baseBranch} into branch`,
+      },
+    });
+  } catch (e) {
+    console.log('merging error occurred!')
+    console.log(e);
+    return await octokit.issues.createComment({
+      ...repoInfo,
+      ...{
+        number: pr.number,
+        body: '**ATTENSION: Auto-updating branch failed! You need to update manually!**',
+      },
+    });
+  }
+  return await octokit.issues.createComment({
     ...repoInfo,
     ...{
       number: pr.number,
-      body: 'コミットが追加されました',
+      body: `Auto-updating has done by ${baseBranch} branch updating.`,
     },
   });
-  return resCreateComment;
 }
 
 async function showOldPRs({ baseBranch, baseSha }) {
